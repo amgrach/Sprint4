@@ -1,7 +1,9 @@
 package org.example.page;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -17,6 +19,7 @@ public class MainPage {
     private final By headerButtonOrder = By.xpath("//button[@class='Button_Button__ra12g']");
     private final By bottomButtonOrder = By.xpath("//button[@class='Button_Button__ra12g Button_Middle__1CSJM']");
 
+    private final By questionBlock = By.className("Home_FAQ__3uVm4");
     public MainPage(WebDriver driver) {
         this.driver = driver;
         driver.get(APP_URL);
@@ -27,7 +30,8 @@ public class MainPage {
     }
 
     public void clickOnQuestionId(String questionNumber) {
-
+        WebElement element = driver.findElement(questionBlock);
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
         driver.findElement(By.id("accordion__heading-" + questionNumber)).click();
 
     }
